@@ -23,20 +23,31 @@ state = {
                 phone: ' 555-555-6678'
             }
         ]
-    }
+    };
+
+    deleteContact = (id) => {
+        const { contacts } = this.state;
+
+        const newContacts = contacts.filter(contact => contact.id !== id);
+
+        this.setState({
+            contacts: newContacts
+        });
+    };
 
   render() {
     const { contacts } = this.state;
 
     return (
-      <div>
+      <React.Fragment>
         {contacts.map(contact => (
         <Contact 
         key={contact.id}
-        contact={contact} 
+        contact={contact}
+        deleteClickHandler={this.deleteContact.bind(this, contact.id) } 
         />
         ))}
-      </div>
+      </React.Fragment>
     )
   }
 }
